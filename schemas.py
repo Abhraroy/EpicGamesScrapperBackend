@@ -13,5 +13,5 @@ class GameCreate(GameDetail):
 
 class GetFreeGame(GameDetail):
     pass
-    class config:
+    class Config:
         from_attributs=True
