@@ -1,0 +1,40 @@
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from Base import Base
+from dotenv import load_dotenv
+import os
+
+from model import FreeGame
+
+
+load_dotenv()
+
+
+# DATABASE_URL = 'postgresql://postgres:abhra12@localhost:5432/Epic_Game_GameDetail'
+
+# DATABASE_URL = 'postgresql+psycopg2://postgres.asszvxtgataryjgvlszh:Ce3oV7nlIz8MDEsf@aws-0-us-east-2.pooler.supabase.com:6543/postgres?sslmode=require'
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+engine = create_engine(DATABASE_URL)
+
+sessionlocal = sessionmaker(autoflush=False,expire_on_commit=False,bind=engine)
+
+
+def get_DB():
+    db = sessionlocal()
+    try:
+        print("Database connected successfully-session established")
+        yield db
+    finally:
+        db.close()
+
+
+def create_table():
+    print("Connected successfully")
+    Base.metadata.create_all(bind=engine)
+
+
+
+# if __name__ == "__main__":
+#     create_table()
