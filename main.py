@@ -7,6 +7,17 @@ from contextlib import asynccontextmanager
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 @asynccontextmanager
 async def lifespan(app:FastAPI):
     print("Server is starting up..")
